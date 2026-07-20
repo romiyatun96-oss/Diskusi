@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Teks Diskusi - SMP Muhammadiyah 2 Depok</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        muh: {
+                            light: '#e6f4ea',
+                            green: '#0f766e', /* Teal-green elegant */
+                            dark: '#042f2e',
+                            yellow: '#f59e0b', /* Gold accent */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #0f766e;
+            border-radius: 3px;
+        }
+        .pulse-light {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body class="bg-purple-50 font-sans text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header / Navbar -->
+    <header class="bg-gradient-to-r from-muh-dark via-muh-green to-teal-800 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-1.5 rounded-full shadow-inner flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+                    <!-- Icon / Lambang Sekolah Representatif -->
+                    <svg class="w-8 h-8 text-muh-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-heading font-extrabold text-base md:text-lg tracking-wide leading-tight text-muh-yellow">SMP MUHAMMADIYAH 2 DEPOK</h1>
+                    <p class="text-[10px] md:text-xs text-teal-100 uppercase tracking-widest font-semibold">Media Pembelajaran Interaktif: Teks Diskusi</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 text-xs md:text-sm">
+                <span class="bg-teal-900 px-3 py-1.5 rounded-full border border-teal-700 flex items-center gap-1.5 font-medium">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    Kelas IX - Bahasa Indonesia
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 flex flex-col lg:flex-row gap-6">
+        
+        <!-- Sidebar Navigation (Responsive) -->
+        <nav class="lg:w-1/4 w-full flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                <div class="hidden lg:block mb-4 text-center pb-4 border-b border-slate-100">
+                    <p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Menu Pembelajaran</p>
+                </div>
+                <!-- Grid Menu on Mobile, Stack on Desktop -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-1 gap-2">
+                    <button onclick="switchTab('beranda')" id="btn-beranda" class="nav-btn flex items-center justify-center lg:justify-start gap-2.5 px-4 py-3 rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 bg-muh-green text-white shadow-md shadow-teal-100">
+                        <i class="fa-solid fa-house text-base"></i> Beranda
+                    </button>
+                    <button onclick="switchTab('tujuan')" id="btn-tujuan" class="nav-btn flex items-center justify-center lg:justify-start gap-2.5 px-4 py-3 rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 bg-white text-slate-600 hover:bg-teal-50 hover:text-muh-green">
+                        <i class="fa-solid fa-bullseye text-base"></i> Tujuan
+                    </button>
+                    <button onclick="switchTab('materi')" id="btn-materi" class="nav-btn flex items-center justify-center lg:justify-start gap-2.5 px-4 py-3 rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 bg-white text-slate-600 hover:bg-teal-50 hover:text-muh-green">
+                        <i class="fa-solid fa-book-open text-base"></i> Materi
+                    </button>
+                    <button onclick="switchTab('simulasi')" id="btn-simulasi" class="nav-btn flex items-center justify-center lg:justify-start gap-2.5 px-4 py-3 rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 bg-white text-slate-600 hover:bg-teal-50 hover:text-muh-green">
+                        <i class="fa-solid fa-laptop-code text-base"></i> Simulasi
+                    </button>
+                    <button onclick="switchTab('aktivitas')" id="btn-aktivitas" class="nav-btn flex items-center justify-center lg:justify-start gap-2.5 px-4 py-3 rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 bg-white text-slate-600 hover:bg-teal-50 hover:text-muh-green col-span-2 sm:col-span-1">
+                        <i class="fa-solid fa-gamepad text-base"></i> Aktivitas
+                    </button>
+                    <button onclick="switchTab('kuis')" id="btn-kuis" class="nav-btn flex items-center justify-center lg:justify-start gap-2.5 px-4 py-3 rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 bg-white text-slate-600 hover:bg-teal-50 hover:text-muh-green col-span-2 sm:col-span-1">
+                        <i class="fa-solid fa-square-poll-horizontal text-base"></i> Kuis Evaluasi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Petunjuk Singkat -->
+            <div class="bg-teal-50 p-4 rounded-2xl border border-teal-100 hidden lg:block">
+                <h4 class="font-bold text-muh-dark text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-info text-muh-green"></i> Petunjuk Belajar
+                </h4>
+                <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                    <li>1. Pahami <strong>Tujuan Pembelajaran</strong> terlebih dahulu.</li>
+                    <li>2. Baca dan pelajari <strong>Materi</strong> secara runut.</li>
+                    <li>3. Cobalah fitur <strong>Simulasi</strong> analisis struktur teks.</li>
+                    <li>4. Latih pemahamanmu di menu <strong>Aktivitas</strong>.</li>
+                    <li>5. Kerjakan <strong>Kuis Evaluasi</strong> untuk mendapatkan sertifikat.</li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Content Area -->
+        <section class="lg:w-3/4 w-full flex flex-col gap-6">
+
+            <!-- TAB 1: BERANDA -->
+            <div id="tab-beranda" class="tab-content block">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="bg-gradient-to-br from-muh-green to-teal-900 p-8 text-white relative overflow-hidden">
+                        <!-- Decorative Shapes -->
+                        <div class="absolute right-0 top-0 opacity-10 transform translate-x-12 -translate-y-12">
+                            <svg width="400" height="400" viewBox="0 0 100 100" fill="currentColor">
+                                <circle cx="50" cy="50" r="40" />
+                            </svg>
+                        </div>
+                        <div class="relative z-10">
+                            <span class="bg-muh-yellow text-muh-dark font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-widest mb-4 inline-block">Mata Pelajaran: Bahasa Indonesia</span>
+                            <h2 class="font-heading font-extrabold text-3xl md:text-4xl mb-3 leading-tight">Menjelajahi Teks Diskusi</h2>
+                            <p class="text-teal-50 text-sm md:text-base max-w-2xl leading-relaxed mb-6">
+                                Selamat datang di Media Pembelajaran Interaktif. Di sini kamu akan belajar menyampaikan pendapat secara kritis, logis, dan santun melalui penguasaan Teks Diskusi. Mari kita mulai proses belajarmu!
+                            </p>
+                            <button onclick="switchTab('tujuan')" class="bg-muh-yellow hover:bg-amber-500 text-muh-dark font-bold px-6 py-3 rounded-xl transition duration-300 shadow-lg flex items-center gap-2 text-sm">
+                                Mulai Pembelajaran <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 grid md:grid-cols-3 gap-6">
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition">
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 text-muh-green flex items-center justify-center mb-4 text-lg">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 mb-1.5 text-sm">Berpikir Kritis</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Melatih kemampuan melihat suatu masalah dari sudut pandang pro (setuju) dan kontra (menentang).</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition">
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 text-muh-green flex items-center justify-center mb-4 text-lg">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 mb-1.5 text-sm">Berargumen Santun</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Menyampaikan argumen logis dan menggunakan bahasa santun yang sesuai dengan akhlak Islami.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition">
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 text-muh-green flex items-center justify-center mb-4 text-lg">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 mb-1.5 text-sm">Asesmen Mandiri</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Uji pemahamanmu secara langsung melalui kuis interaktif dengan skor instan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: TUJUAN PEMBELAJARAN -->
+            <div id="tab-tujuan" class="tab-content hidden">
+                <div class="bg-white rounded-3xl shadow-sm border border-purple-100 p-6 md:p-8">
+                    <div class="flex items-center gap-3 border-b pb-4 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-heading font-extrabold text-xl text-slate-800">Tujuan Pembelajaran</h2>
+                            <p class="text-xs text-slate-400">Kompetensi yang akan kamu capai hari ini</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-purple-50 border-l-4 border-purple-600">
+                                <span class="text-xs font-bold text-purple-700 uppercase tracking-wide">Tujuan 1</span>
+                                <h4 class="font-bold text-slate-800 mt-1 text-sm">Menganalisis Gagasan & Pandangan</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">Peserta didik mampu menganalisis gagasan, pandangan, dan/atau pesan dalam teks diskusi secara kritis.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-purple-50 border-l-4 border-purple-600">
+                                <span class="text-xs font-bold text-purple-700 uppercase tracking-wide">Tujuan 2</span>
+                                <h4 class="font-bold text-slate-800 mt-1 text-sm">Menemukan Makna Tersurat & Tersirat</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">Peserta didik mampu menganalisis informasi dari teks diskusi untuk menemukan makna tersurat dan tersirat secara tepat.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-purple-50 border-l-4 border-purple-600">
+                                <span class="text-xs font-bold text-purple-700 uppercase tracking-wide">Tujuan 3</span>
+                                <h4 class="font-bold text-slate-800 mt-1 text-sm">Menginterpretasi Informasi Lintas Sumber</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">Peserta didik mampu menginterpretasi informasi dari teks diskusi menggunakan sumber informasi lain sebagai pembanding.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-purple-50 border-l-4 border-purple-600">
+                                <span class="text-xs font-bold text-purple-700 uppercase tracking-wide">Tujuan 4</span>
+                                <h4 class="font-bold text-slate-800 mt-1 text-sm">Struktur & Kebahasaan Teks Diskusi</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">Peserta didik mampu memahami dan menelaah struktur serta ciri kebahasaan yang membangun teks diskusi.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-purple-50 border-l-4 border-purple-600">
+                                <span class="text-xs font-bold text-purple-700 uppercase tracking-wide">Tujuan 5</span>
+                                <h4 class="font-bold text-slate-800 mt-1 text-sm">Menulis Gagasan & Pandangan Kritis</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">Peserta didik mampu menulis gagasan, pandangan, arahan, pesan, dan/atau pengalaman dalam teks diskusi secara logis, kritis, dan kreatif.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-purple-50 border-l-4 border-purple-600">
+                                <span class="text-xs font-bold text-purple-700 uppercase tracking-wide">Tujuan 6</span>
+                                <h4 class="font-bold text-slate-800 mt-1 text-sm">Mempresentasikan Teks Diskusi</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">Peserta didik mampu mempresentasikan teks diskusi secara kritis dan kreatif di depan khalayak.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-amber-50 border-l-4 border-muh-yellow">
+                                <span class="text-xs font-bold text-muh-yellow uppercase tracking-wide">Integrasi Nilai Islami</span>
+                                <h4 class="font-bold text-slate-800 mt-1 text-sm">Berdiskusi yang Santun</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">Membiasakan sikap tasamuh (toleransi), menghargai pendapat orang lain, dan mengutamakan kesantunan bahasa dalam bermusyawarah.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t flex justify-end">
+                        <button onclick="switchTab('materi')" class="bg-muh-green hover:bg-teal-800 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition duration-300 flex items-center gap-2">
+                            Lanjut ke Materi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: MATERI PEMBELAJARAN -->
+            <div id="tab-materi" class="tab-content hidden">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    <div class="flex items-center gap-3 border-b pb-4 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-teal-100 text-muh-green flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-heading font-extrabold text-xl text-slate-800">Materi Pembelajaran</h2>
+                            <p class="text-xs text-slate-400">Pahami konsep dasar Teks Diskusi di bawah ini</p>
+                        </div>
+                    </div>
+
+                    <!-- Materi Navigation tabs -->
+                    <div class="flex border-b border-slate-100 mb-6 overflow-x-auto gap-2">
+                        <button onclick="switchSubMateri('materi-analisis')" id="btn-materi-analisis" class="sub-materi-btn border-b-2 border-muh-green text-muh-green px-4 py-2 text-xs font-bold whitespace-nowrap">
+                            1. Menganalisis Gagasan & Makna
+                        </button>
+                        <button onclick="switchSubMateri('materi-struktur-bahasa')" id="btn-materi-struktur-bahasa" class="sub-materi-btn border-b-2 border-transparent text-slate-500 hover:text-muh-green px-4 py-2 text-xs font-bold whitespace-nowrap">
+                            2. Struktur & Kebahasaan
+                        </button>
+                        <button onclick="switchSubMateri('materi-interpretasi')" id="btn-materi-interpretasi" class="sub-materi-btn border-b-2 border-transparent text-slate-500 hover:text-muh-green px-4 py-2 text-xs font-bold whitespace-nowrap">
+                            3. Menginterpretasi Lintas Sumber
+                        </button>
+                        <button onclick="switchSubMateri('materi-menulis')" id="btn-materi-menulis" class="sub-materi-btn border-b-2 border-transparent text-slate-500 hover:text-muh-green px-4 py-2 text-xs font-bold whitespace-nowrap">
+                            4. Menulis Teks Diskusi
+                        </button>
+                        <button onclick="switchSubMateri('materi-presentasi')" id="btn-materi-presentasi" class="sub-materi-btn border-b-2 border-transparent text-slate-500 hover:text-muh-green px-4 py-2 text-xs font-bold whitespace-nowrap">
+                            5. Mempresentasikan Teks
+                        </button>
+                    </div>
+
+                    <!-- Sub Materi 1: Menganalisis Gagasan & Makna -->
+                    <div id="materi-analisis" class="sub-materi-content block space-y-4">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h3 class="font-bold text-base text-muh-dark mb-3 flex items-center gap-2">
+                                <span class="p-1.5 bg-teal-100 text-muh-green rounded-lg text-xs font-extrabold">A</span> Menganalisis Gagasan, Pandangan, & Pesan
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Dalam teks diskusi, gagasan utama dipecah menjadi dua kutub pandangan yang saling berhadapan. Untuk menganalisisnya secara kritis, kita harus mampu mengidentifikasi:
+                            </p>
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="bg-emerald-50 p-3.5 rounded-xl border border-emerald-100">
+                                    <h4 class="font-bold text-emerald-800 text-xs flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-face-smile"></i> Pandangan Pro (Afirmatif)
+                                    </h4>
+                                    <p class="text-[11px] text-emerald-900 leading-relaxed">
+                                        Sudut pandang yang menyetujui, mendukung, atau memperkuat isu dengan landasan argumen logis, fakta, dan data yang kuat.
+                                    </p>
+                                </div>
+                                <div class="bg-red-50 p-3.5 rounded-xl border border-red-100">
+                                    <h4 class="font-bold text-red-800 text-xs flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-face-frown"></i> Pandangan Kontra (Oposisi)
+                                    </h4>
+                                    <p class="text-[11px] text-red-900 leading-relaxed">
+                                        Sudut pandang yang menolak, menyanggah, atau mengkritisi isu guna menyeimbangkan perspektif agar adil.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 p-5 rounded-2xl border border-purple-100">
+                            <h3 class="font-bold text-base text-purple-900 mb-3 flex items-center gap-2">
+                                <span class="p-1.5 bg-purple-200 text-purple-800 rounded-lg text-xs font-extrabold">B</span> Menemukan Makna Tersurat vs Tersirat
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                Membaca teks diskusi memerlukan kepekaan untuk membedakan apa yang diucapkan secara langsung dengan apa yang tersirat di baliknya.
+                            </p>
+                            <div class="space-y-2.5">
+                                <div class="bg-white p-3 rounded-xl border border-purple-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs shrink-0">1</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">Makna Tersurat (Eksplisit)</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed mt-0.5">Informasi nyata yang tertulis jelas di lembar teks. Misalnya: data statistik, kutipan narasumber, atau peraturan resmi sekolah yang dikutip langsung.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-purple-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs shrink-0">2</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">Makna Tersirat (Implisit)</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed mt-0.5">Pesan mendalam, bias pandangan penulis, atau solusi damai halus yang tidak tertulis langsung, melainkan harus disimpulkan sendiri oleh pembaca melalui pemahaman konteks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub Materi 2: Struktur & Kebahasaan Teks Diskusi -->
+                    <div id="materi-struktur-bahasa" class="sub-materi-content hidden space-y-4">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h3 class="font-bold text-base text-muh-dark mb-3 flex items-center gap-2">
+                                <span class="p-1.5 bg-teal-100 text-muh-green rounded-lg text-xs font-extrabold">A</span> Struktur Pembangun Teks Diskusi
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Teks diskusi disusun secara sistematis agar argumen yang saling bertolak belakang dapat disampaikan secara objektif, adil, dan logis. Struktur pembangun tersebut terdiri dari:
+                            </p>
+                            <div class="grid sm:grid-cols-2 gap-3 mb-2">
+                                <div class="bg-white p-3.5 rounded-xl border border-slate-200 hover:shadow-sm transition">
+                                    <h4 class="font-bold text-teal-800 text-xs flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-flag"></i> 1. Isu
+                                    </h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                                        Bagian pendahuluan yang mengenalkan topik, masalah, atau isu hangat yang akan didiskusikan secara netral untuk menarik minat pembaca.
+                                    </p>
+                                </div>
+                                <div class="bg-white p-3.5 rounded-xl border border-slate-200 hover:shadow-sm transition">
+                                    <h4 class="font-bold text-emerald-800 text-xs flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-circle-check"></i> 2. Argumen Pro (Pendukung)
+                                    </h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                                        Berisi rangkaian alasan positif, opini ahli, fakta ilmiah, dan data konkret yang mendukung atau menyetujui isu bahasan.
+                                    </p>
+                                </div>
+                                <div class="bg-white p-3.5 rounded-xl border border-slate-200 hover:shadow-sm transition">
+                                    <h4 class="font-bold text-red-800 text-xs flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-circle-xmark"></i> 3. Argumen Kontra (Penentang)
+                                    </h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                                        Menyajikan sisi sebaliknya, berupa argumen penolak, sanggahan, dan fakta pembatas yang menentang isu agar tulisan tetap berimbang.
+                                    </p>
+                                </div>
+                                <div class="bg-white p-3.5 rounded-xl border border-slate-200 hover:shadow-sm transition">
+                                    <h4 class="font-bold text-amber-800 text-xs flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-handshake"></i> 4. Simpulan & Saran (Rekomendasi)
+                                    </h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                                        Jalan keluar bijak, resolusi damai, atau konklusi objektif dari hasil analisis kedua argumen tanpa mendiskreditkan salah satu pihak.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-teal-50 p-5 rounded-2xl border border-teal-100">
+                            <h3 class="font-bold text-base text-teal-900 mb-3 flex items-center gap-2">
+                                <span class="p-1.5 bg-teal-200 text-teal-800 rounded-lg text-xs font-extrabold">B</span> Ciri Kebahasaan Teks Diskusi
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                Untuk menciptakan argumen yang bernas dan persuasif namun tetap menjunjung asas kesopanan, teks diskusi memanfaatkan ciri bahasa khusus:
+                            </p>
+                            <div class="space-y-2.5">
+                                <div class="bg-white p-3 rounded-xl border border-teal-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-lg bg-teal-100 text-muh-green flex items-center justify-center font-bold text-xs shrink-0"><i class="fa-solid fa-scale-balanced"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">1. Penggunaan Modalitas</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed mt-0.5">Kata tugas yang menyatakan tingkat kepastian atau sikap pembicara terhadap informasi. Contoh: *harus, sebaiknya, dapat, mungkin, akan*.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-teal-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-lg bg-teal-100 text-muh-green flex items-center justify-center font-bold text-xs shrink-0"><i class="fa-solid fa-arrows-split-up-and-left"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">2. Konjungsi Pertentangan (Kohesi)</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed mt-0.5">Kata penghubung penanda sudut pandang oposisi demi kohesi tulisan. Contoh: *namun, tetapi, sebaliknya, sedangkan, akan tetapi*.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-teal-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-lg bg-teal-100 text-muh-green flex items-center justify-center font-bold text-xs shrink-0"><i class="fa-solid fa-spell-check"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">3. Kosakata Evaluatif</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed mt-0.5">Kata yang bermakna penilaian objektif maupun subjektif terhadap masalah. Contoh: *merugikan, menguntungkan, memprihatinkan, efektif, krusial*.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub Materi 3: Menginterpretasi Lintas Sumber -->
+                    <div id="materi-interpretasi" class="sub-materi-content hidden space-y-4">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h3 class="font-bold text-base text-muh-dark mb-3 flex items-center gap-2">
+                                <span class="p-1.5 bg-teal-100 text-muh-green rounded-lg text-xs font-extrabold">C</span> Sintesis & Interpretasi Lintas Sumber
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Argumen di dalam teks diskusi sering kali tidak cukup jika hanya bersumber dari satu sudut pandang atau satu dokumen saja. Kita perlu membandingkan informasi utama dengan sumber informasi luar lainnya secara kritis.
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-3">
+                                <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                                    <div class="w-7 h-7 rounded-lg bg-teal-50 text-muh-green flex items-center justify-center mb-2.5 text-xs"><i class="fa-solid fa-code-compare"></i></div>
+                                    <h4 class="font-bold text-slate-800 text-xs mb-1">Mencari Pembanding</h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">Menggunakan jurnal ilmiah, portal berita tepercaya, atau undang-undang sebagai pembanding klaim argumen pro maupun kontra.</p>
+                                </div>
+                                <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                                    <div class="w-7 h-7 rounded-lg bg-teal-50 text-muh-green flex items-center justify-center mb-2.5 text-xs"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                    <h4 class="font-bold text-slate-800 text-xs mb-1">Menyaring Validitas & Bias</h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">Memeriksa apakah data pendukung yang disajikan dalam teks memiliki bias kepentingan atau sudah kedaluwarsa secara keilmuan.</p>
+                                </div>
+                                <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                                    <div class="w-7 h-7 rounded-lg bg-teal-50 text-muh-green flex items-center justify-center mb-2.5 text-xs"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                    <h4 class="font-bold text-slate-800 text-xs mb-1">Menarik Benang Merah</h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">Menggabungkan fakta-fakta dari berbagai sumber untuk melahirkan simpulan/solusi tengah yang lebih kaya dan berimbang.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub Materi 3: Menulis Teks Diskusi -->
+                    <div id="materi-menulis" class="sub-materi-content hidden space-y-4">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h3 class="font-bold text-base text-muh-dark mb-3 flex items-center gap-2">
+                                <span class="p-1.5 bg-teal-100 text-muh-green rounded-lg text-xs font-extrabold">D</span> Langkah Menulis Secara Logis, Kritis, & Kreatif
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Menulis teks diskusi melatih Anda untuk merangkai pikiran yang seimbang, adil, dan logis. Ikutilah 4 tahapan sistematis berikut ini:
+                            </p>
+
+                            <div class="space-y-3">
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-teal-100 text-muh-green font-bold text-xs flex items-center justify-center shrink-0">1</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">Menentukan Isu Aktual & Menarik</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed">Pilihlah masalah yang sedang hangat diperbincangkan di masyarakat, sekolah, atau dunia digital yang secara alami memiliki kubu pro dan kontra.</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-teal-100 text-muh-green font-bold text-xs flex items-center justify-center shrink-0">2</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">Mengumpulkan Bahan & Data Berimbang</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed">Cari data, fakta, opini ahli, dan contoh konkret dari masing-masing sudut pandang (Pro dan Kontra) agar tulisan Anda tidak berat sebelah.</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-teal-100 text-muh-green font-bold text-xs flex items-center justify-center shrink-0">3</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">Menyusun Kerangka Sesuai Struktur Teks</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed">Urutkan paragraf dengan alur yang padu: Isu (pembuka) &rarr; Paragraf Pendukung (Pro) &rarr; Paragraf Penolak (Kontra) &rarr; Simpulan/Solusi Damai.</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 flex gap-3">
+                                    <div class="w-7 h-7 rounded-full bg-teal-100 text-muh-green font-bold text-xs flex items-center justify-center shrink-0">4</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs">Merevisi & Menyelaraskan Kebahasaan</h4>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed">Gunakan kata modalitas (sebaiknya, harus), konjungsi pertentangan (namun, sebaliknya), serta kosakata evaluatif demi argumen yang bernas dan santun.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub Materi 4: Mempresentasikan Teks -->
+                    <div id="materi-presentasi" class="sub-materi-content hidden space-y-4">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h3 class="font-bold text-base text-muh-dark mb-3 flex items-center gap-2">
+                                <span class="p-1.5 bg-teal-100 text-muh-green rounded-lg text-xs font-extrabold">E</span> Mempresentasikan Teks secara Kritis & Kreatif
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Presentasi teks diskusi bukan sekadar membaca naskah, melainkan memimpin pemikiran forum menuju kedewasaan menyikapi perbedaan. Perhatikan teknik utama berikut:
+                            </p>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                    <h4 class="font-bold text-muh-green text-xs mb-1.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-volume-high"></i> Penyampaian Objektif (Kritis)
+                                    </h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                                        Sampaikan argumen pendukung dan penentang dengan porsi waktu serta intonasi yang adil. Hindari sikap memihak salah satu kubu saat memaparkan materi utama.
+                                    </p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                    <h4 class="font-bold text-muh-green text-xs mb-1.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-chalkboard-user"></i> Penggunaan Media Kreatif
+                                    </h4>
+                                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                                        Gunakan alat bantu visual seperti peta pikiran (*mind mapping*), salindia presentasi interaktif, atau bagan perbandingan Pro-Kontra yang estetik demi audiens yang fokus.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 mt-3">
+                                <h4 class="font-bold text-amber-800 text-xs mb-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-people-arrows"></i> Integrasi Nilai Al-Islam (Sikap Musyawarah)
+                                </h4>
+                                <p class="text-[11px] text-slate-600 leading-relaxed">
+                                    Sebagai siswa Muhammadiyah, utamakan sikap <strong>tasamuh</strong> (toleransi) saat menghadapi perbedaan pendapat di sesi tanya jawab. Tanggapi interupsi atau sanggahan dengan santun, lemah lembut, dan selalu mencari mufakat yang membawa kemaslahatan bersama sesuai dengan prinsip musyawarah dalam Al-Qur'an.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t flex justify-between">
+                        <button onclick="switchTab('tujuan')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-xs transition duration-300">
+                            Kembali ke Tujuan
+                        </button>
+                        <button onclick="switchTab('simulasi')" class="bg-muh-green hover:bg-teal-800 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition duration-300 flex items-center gap-2">
+                            Lanjut ke Simulasi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: SIMULASI -->
+            <div id="tab-simulasi" class="tab-content hidden">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    <div class="flex items-center gap-3 border-b pb-4 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-teal-100 text-muh-green flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-heading font-extrabold text-xl text-slate-800">Simulasi Teks Interaktif</h2>
+                            <p class="text-xs text-slate-400">Klik setiap paragraf untuk melihat penjelasan strukturnya!</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-5 bg-teal-50 p-4 rounded-xl border border-teal-100">
+                        <p class="text-xs text-teal-900 leading-relaxed font-medium">
+                            <i class="fa-solid fa-lightbulb mr-1.5 text-muh-yellow"></i>
+                            <strong>Petunjuk:</strong> Di bawah ini adalah kutipan teks diskusi bertajuk <strong>"Dilema Penggunaan Gawai/HP di Sekolah"</strong>. Klik atau ketuk paragraf berwarna di bawah untuk melihat analisis struktur teksnya secara mendalam.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Left: Interactive Text Blocks -->
+                        <div class="space-y-3">
+                            <div onclick="selectSimulatorBlock('isu')" id="sim-block-isu" class="sim-block p-4 rounded-xl border-2 border-teal-500 bg-teal-50/50 cursor-pointer hover:shadow-md transition duration-200">
+                                <span class="text-[9px] font-bold text-teal-700 uppercase tracking-widest bg-teal-100 px-2 py-0.5 rounded-md">Blok A</span>
+                                <p class="text-xs text-slate-700 leading-relaxed mt-2 font-serif">
+                                    "Di era digital saat ini, penggunaan telepon genggam atau gawai oleh siswa di lingkungan sekolah masih menimbulkan perdebatan hangat di kalangan pendidik dan orang tua murid."
+                                </p>
+                            </div>
+
+                            <div onclick="selectSimulatorBlock('pro')" id="sim-block-pro" class="sim-block p-4 rounded-xl border-2 border-transparent bg-white cursor-pointer hover:shadow-md hover:bg-emerald-50/30 transition duration-200 border-dashed border-slate-200">
+                                <span class="text-[9px] font-bold text-emerald-700 uppercase tracking-widest bg-emerald-100 px-2 py-0.5 rounded-md">Blok B</span>
+                                <p class="text-xs text-slate-700 leading-relaxed mt-2 font-serif">
+                                    "Pihak yang setuju berargumen bahwa gawai sangat membantu sebagai media belajar interaktif. Siswa dapat mencari referensi materi di internet dengan cepat, mengakses e-book, dan memanfaatkan aplikasi edukasi yang menunjang interaksi kreatif di kelas."
+                                </p>
+                            </div>
+
+                            <div onclick="selectSimulatorBlock('kontra')" id="sim-block-kontra" class="sim-block p-4 rounded-xl border-2 border-transparent bg-white cursor-pointer hover:shadow-md hover:bg-red-50/30 transition duration-200 border-dashed border-slate-200">
+                                <span class="text-[9px] font-bold text-red-700 uppercase tracking-widest bg-red-100 px-2 py-0.5 rounded-md">Blok C</span>
+                                <p class="text-xs text-slate-700 leading-relaxed mt-2 font-serif">
+                                    "Namun di sisi lain, kelompok yang menentang mengkhawatirkan dampak negatifnya. Gawai dapat mengalihkan fokus belajar siswa di kelas, memicu tindakan kecurangan saat ujian, serta mengurangi interaksi sosial antarsiswa secara langsung di sekolah."
+                                </p>
+                            </div>
+
+                            <div onclick="selectSimulatorBlock('simpulan')" id="sim-block-simpulan" class="sim-block p-4 rounded-xl border-2 border-transparent bg-white cursor-pointer hover:shadow-md hover:bg-amber-50/30 transition duration-200 border-dashed border-slate-200">
+                                <span class="text-[9px] font-bold text-amber-700 uppercase tracking-widest bg-amber-100 px-2 py-0.5 rounded-md">Blok D</span>
+                                <p class="text-xs text-slate-700 leading-relaxed mt-2 font-serif">
+                                    "Oleh karena itu, jalan keluar bijak yang bisa diambil adalah menerapkan regulasi yang ketat. Sekolah sebaiknya mengizinkan penggunaan gawai hanya pada jam pelajaran tertentu saat ditugaskan oleh guru demi tujuan pembelajaran."
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right: Dynamic Analysis Output -->
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                            <div id="sim-analysis-box" class="space-y-4">
+                                <div class="flex items-center gap-2">
+                                    <span id="sim-title-tag" class="bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-lg">STRUKTUR: ISU</span>
+                                </div>
+                                <h3 id="sim-title" class="font-heading font-bold text-lg text-slate-800">Bagian Isu (Pengantar Topik)</h3>
+                                <p id="sim-desc" class="text-xs text-slate-600 leading-relaxed">
+                                    Blok ini bertindak sebagai pembuka diskusi. Penulis memperkenalkan topik atau masalah hangat yang memiliki pro dan kontra secara netral sebelum membahas detail pendapat masing-masing pihak.
+                                </p>
+                                <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide mb-1.5">Unsur Kebahasaan Menonjol:</p>
+                                    <ul id="sim-lang" class="text-xs text-slate-700 space-y-1">
+                                        <li>• <span class="font-bold text-teal-600">"masih menimbulkan perdebatan"</span>: Frasa evaluatif pembangun konflik pembahasan.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-slate-200 text-center">
+                                <span class="text-[10px] text-slate-400 italic">Interaktivitas Simulasi SMPM 2 Depok</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t flex justify-between">
+                        <button onclick="switchTab('materi')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-xs transition duration-300">
+                            Kembali ke Materi
+                        </button>
+                        <button onclick="switchTab('aktivitas')" class="bg-muh-green hover:bg-teal-800 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition duration-300 flex items-center gap-2">
+                            Lanjut ke Aktivitas <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: AKTIVITAS -->
+            <div id="tab-aktivitas" class="tab-content hidden">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    <div class="flex items-center gap-3 border-b pb-4 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-teal-100 text-muh-green flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-heading font-extrabold text-xl text-slate-800">Aktivitas Mandiri: Pilah Argumen</h2>
+                            <p class="text-xs text-slate-400">Kelompokkan pernyataan di bawah ini ke dalam wadah yang sesuai!</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-5 bg-teal-50 p-4 rounded-xl border border-teal-100">
+                        <p class="text-xs text-teal-900 leading-relaxed">
+                            <i class="fa-solid fa-gamepad mr-1 text-muh-green"></i> <strong>Topik Diskusi:</strong> "Penerapan Pembelajaran Jarak Jauh (PJJ) berbasis Internet secara Permanen." <br>
+                            <strong>Cara Bermain:</strong> Klik tombol <strong class="text-emerald-700">PRO</strong> jika kalimat mendukung topik tersebut, atau klik <strong class="text-red-700">KONTRA</strong> jika menolaknya.
+                        </p>
+                    </div>
+
+                    <!-- Sorting Game Container -->
+                    <div class="space-y-4">
+                        <!-- Progress & Score -->
+                        <div class="flex justify-between items-center text-xs font-bold text-slate-600 bg-slate-50 p-3 rounded-lg">
+                            <span>Sisa Soal: <span id="game-remaining">4</span>/4</span>
+                            <span>Skor Game: <span id="game-score">0</span></span>
+                        </div>
+
+                        <!-- Current Card to Categorize -->
+                        <div id="game-card-container" class="bg-slate-50 border border-dashed border-slate-300 p-6 rounded-2xl flex flex-col justify-center items-center min-h-[160px] text-center relative overflow-hidden">
+                            <div id="game-finished-screen" class="hidden flex-col items-center justify-center p-4">
+                                <i class="fa-solid fa-circle-check text-4xl text-emerald-500 mb-2"></i>
+                                <h4 class="font-bold text-slate-800 text-base">Hebat! Aktivitas Selesai</h4>
+                                <p class="text-xs text-slate-500 mt-1 max-w-sm">Kamu berhasil mengelompokkan semua argumentasi pro dan kontra dengan baik!</p>
+                                <button onclick="resetGame()" class="mt-4 bg-muh-green hover:bg-teal-800 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-md">Main Lagi</button>
+                            </div>
+
+                            <div id="game-play-screen" class="space-y-4 w-full">
+                                <p id="game-statement" class="font-serif text-sm md:text-base text-slate-800 px-4 font-medium leading-relaxed">
+                                    "PJJ memberikan fleksibilitas waktu bagi siswa untuk belajar secara mandiri di rumah tanpa terbatas ruang kelas."
+                                </p>
+                                <div class="flex justify-center gap-3">
+                                    <button onclick="handleGameChoice('pro')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition duration-200 shadow-md shadow-emerald-100 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-thumbs-up"></i> PRO (Mendukung)
+                                    </button>
+                                    <button onclick="handleGameChoice('kontra')" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition duration-200 shadow-md shadow-red-100 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-thumbs-down"></i> KONTRA (Menentang)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Categorized Box Views (Visual feedback only) -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                                <h5 class="font-bold text-xs text-emerald-800 mb-2"><i class="fa-solid fa-square-check mr-1"></i> Argumen Terpilah PRO</h5>
+                                <div id="pro-box-list" class="space-y-1.5 text-[10px] text-emerald-900">
+                                    <span class="block italic text-slate-400">Belum ada...</span>
+                                </div>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                                <h5 class="font-bold text-xs text-red-800 mb-2"><i class="fa-solid fa-rectangle-xmark mr-1"></i> Argumen Terpilah KONTRA</h5>
+                                <div id="kontra-box-list" class="space-y-1.5 text-[10px] text-red-900">
+                                    <span class="block italic text-slate-400">Belum ada...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t flex justify-between">
+                        <button onclick="switchTab('simulasi')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-xs transition duration-300">
+                            Kembali ke Simulasi
+                        </button>
+                        <button onclick="switchTab('kuis')" class="bg-muh-green hover:bg-teal-800 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition duration-300 flex items-center gap-2">
+                            Lanjut ke Kuis <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 6: KUIS EVALUASI -->
+            <div id="tab-kuis" class="tab-content hidden">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-8">
+                    
+                    <!-- Kuis Header -->
+                    <div class="flex items-center justify-between border-b pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 text-muh-green flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-square-poll-horizontal"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-heading font-extrabold text-xl text-slate-800">Kuis Evaluasi Mandiri</h2>
+                                <p class="text-xs text-slate-400">Uji kemampuan pemahaman materi secara komprehensif</p>
+                            </div>
+                        </div>
+                        <span id="quiz-progress-badge" class="bg-muh-green text-white text-xs px-3 py-1 rounded-full font-bold">Soal: 1/5</span>
+                    </div>
+
+                    <!-- Welcome / Start Quiz Form -->
+                    <div id="quiz-intro-section" class="space-y-6 text-center py-6">
+                        <div class="max-w-md mx-auto">
+                            <i class="fa-solid fa-file-signature text-5xl text-muh-yellow mb-4"></i>
+                            <h3 class="font-heading font-bold text-lg text-slate-800 mb-2">Siap untuk Memulai Evaluasi?</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">
+                                Kuis terdiri dari 5 bentuk soal bervariasi (Pilihan Ganda, PG Kompleks, Drag-Drop, Menjodohkan, Benar/Salah). Nilai minimum kelulusan adalah <strong>75</strong>. Isikan nama lengkapmu di bawah ini untuk memulai:
+                            </p>
+                            
+                            <div class="mb-4 text-left">
+                                <label for="student-name" class="block text-xs font-bold text-slate-600 mb-1.5">Nama Lengkap Siswa:</label>
+                                <input type="text" id="student-name" placeholder="Masukkan nama lengkapmu..." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-muh-green text-sm">
+                            </div>
+                            
+                            <button onclick="startQuiz()" class="w-full bg-muh-green hover:bg-teal-800 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 text-sm">
+                                Mulai Kerjakan Kuis <i class="fa-solid fa-play ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- QUESTION CONTAINER -->
+                    <div id="quiz-play-section" class="hidden space-y-6">
+                        
+                        <!-- SOAL 1: Pilihan Ganda Tunggal -->
+                        <div id="question-1" class="question-block space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-muh-green">
+                                <span class="bg-teal-100 text-muh-green text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Jenis: Pilihan Ganda Tunggal</span>
+                                <p class="text-sm text-slate-800 font-medium mt-2 leading-relaxed">
+                                    1. Manakah di bawah ini yang merupakan fungsi utama dari bagian "Simpulan/Saran" dalam struktur teks diskusi?
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="radio" name="q1-opt" value="A" class="w-4 h-4 text-muh-green focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">A. Memperkenalkan isu atau masalah hangat yang terjadi di masyarakat.</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="radio" name="q1-opt" value="B" class="w-4 h-4 text-muh-green focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">B. Menyajikan jalan tengah atau alternatif penyelesaian damai tanpa memihak salah satu sisi.</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="radio" name="q1-opt" value="C" class="w-4 h-4 text-muh-green focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">C. Memberikan sanggahan tajam agar pembaca langsung menolak pendapat pro.</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="radio" name="q1-opt" value="D" class="w-4 h-4 text-muh-green focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">D. Menampilkan data statistik atau hasil survei guna meyakinkan pembaca.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- SOAL 2: Pilihan Ganda Kompleks -->
+                        <div id="question-2" class="question-block hidden space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-muh-green">
+                                <span class="bg-teal-100 text-muh-green text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Jenis: Pilihan Ganda Kompleks</span>
+                                <p class="text-sm text-slate-800 font-medium mt-2 leading-relaxed">
+                                    2. Pilihlah kata-kata di bawah ini yang tergolong ke dalam kata tugas <strong class="text-muh-green">konjungsi pertentangan</strong> yang lazim digunakan dalam teks diskusi! (Jawaban benar lebih dari satu)
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="checkbox" name="q2-opt" value="namun" class="w-4 h-4 text-muh-green rounded focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">A. Namun</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="checkbox" name="q2-opt" value="sehingga" class="w-4 h-4 text-muh-green rounded focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">B. Sehingga</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="checkbox" name="q2-opt" value="sebaliknya" class="w-4 h-4 text-muh-green rounded focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">C. Sebaliknya</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-teal-50/50 cursor-pointer transition">
+                                    <input type="checkbox" name="q2-opt" value="tetapi" class="w-4 h-4 text-muh-green rounded focus:ring-muh-green">
+                                    <span class="text-xs text-slate-700">D. Tetapi</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- SOAL 3: Drag and Drop (Click to Place for Responsive Devices) -->
+                        <div id="question-3" class="question-block hidden space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-muh-green">
+                                <span class="bg-teal-100 text-muh-green text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Jenis: Seret & Lepas (Pasangkan)</span>
+                                <p class="text-sm text-slate-800 font-medium mt-2 leading-relaxed">
+                                    3. Pasangkan struktur berikut dengan definisi ringkasnya. <br>
+                                    <span class="text-xs text-slate-500 font-normal">Petunjuk: Ketuk/Klik kartu nama struktur di bagian atas, lalu ketuk/klik kotak sasaran yang cocok di bagian bawah untuk menaruhnya.</span>
+                                </p>
+                            </div>
+
+                            <!-- Source Items to Place -->
+                            <div class="flex flex-wrap gap-2.5 justify-center py-2" id="drag-items-container">
+                                <button onclick="selectDragItem('Isu', this)" class="drag-btn bg-teal-100 border border-teal-300 text-muh-green font-bold px-3.5 py-2 rounded-xl text-xs hover:bg-teal-200 transition">
+                                    Isu
+                                </button>
+                                <button onclick="selectDragItem('Argumen Pro', this)" class="drag-btn bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-3.5 py-2 rounded-xl text-xs hover:bg-emerald-200 transition">
+                                    Argumen Pro
+                                </button>
+                                <button onclick="selectDragItem('Simpulan', this)" class="drag-btn bg-amber-100 border border-amber-300 text-amber-800 font-bold px-3.5 py-2 rounded-xl text-xs hover:bg-amber-200 transition">
+                                    Simpulan
+                                </button>
+                            </div>
+
+                            <!-- Targets Grid -->
+                            <div class="grid md:grid-cols-3 gap-3">
+                                <div onclick="placeDragItem('target-1')" class="bg-slate-50 p-4 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-between min-h-[140px] text-center cursor-pointer hover:bg-slate-100/50 transition">
+                                    <p class="text-xs text-slate-600 leading-snug">"Pengenalan masalah atau sudut pandang umum di awal teks."</p>
+                                    <div id="target-1" class="w-full mt-3 p-2 rounded-lg bg-white border border-slate-200 min-h-[38px] flex items-center justify-center text-xs font-bold text-slate-800">
+                                        [ Letakkan di sini ]
+                                    </div>
+                                </div>
+
+                                <div onclick="placeDragItem('target-2')" class="bg-slate-50 p-4 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-between min-h-[140px] text-center cursor-pointer hover:bg-slate-100/50 transition">
+                                    <p class="text-xs text-slate-600 leading-snug">"Penyajian fakta penunjang yang setuju terhadap ide bahasan."</p>
+                                    <div id="target-2" class="w-full mt-3 p-2 rounded-lg bg-white border border-slate-200 min-h-[38px] flex items-center justify-center text-xs font-bold text-slate-800">
+                                        [ Letakkan di sini ]
+                                    </div>
+                                </div>
+
+                                <div onclick="placeDragItem('target-3')" class="bg-slate-50 p-4 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-between min-h-[140px] text-center cursor-pointer hover:bg-slate-100/50 transition">
+                                    <p class="text-xs text-slate-600 leading-snug">"Saran, solusi tengah, atau hasil akhir kesepakatan bersama."</p>
+                                    <div id="target-3" class="w-full mt-3 p-2 rounded-lg bg-white border border-slate-200 min-h-[38px] flex items-center justify-center text-xs font-bold text-slate-800">
+                                        [ Letakkan di sini ]
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button onclick="resetDragNDrop()" class="text-[11px] text-slate-400 hover:text-muh-green font-medium underline"><i class="fa-solid fa-rotate-left mr-1"></i>Reset Pasangan</button>
+                            </div>
+                        </div>
+
+                        <!-- SOAL 4: Menjodohkan (Matching) -->
+                        <div id="question-4" class="question-block hidden space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-muh-green">
+                                <span class="bg-teal-100 text-muh-green text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Jenis: Menjodohkan</span>
+                                <p class="text-sm text-slate-800 font-medium mt-2 leading-relaxed">
+                                    4. Jodohkanlah contoh potongan kalimat di sebelah kiri dengan jenis unsurnya yang tepat di sebelah kanan! <br>
+                                    <span class="text-xs text-slate-500 font-normal">Petunjuk: Klik satu kalimat di kiri (berwarna abu-abu), lalu klik satu kategori pasangannya di kanan (berwarna putih) hingga berwarna sama.</span>
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <!-- Left Column: Questions -->
+                                <div class="space-y-2">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Pernyataan / Kutipan Kalimat</p>
+                                    <div onclick="selectMatchLeft('left-1')" id="left-1" class="match-left p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer text-xs font-medium text-slate-700 transition">
+                                        1. "Akan tetapi, tidak sedikit pula orang yang menganggap game online merusak moral."
+                                    </div>
+                                    <div onclick="selectMatchLeft('left-2')" id="left-2" class="match-left p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer text-xs font-medium text-slate-700 transition">
+                                        2. "Sebaiknya orang tua mendampingi anak dalam menyaring informasi digital."
+                                    </div>
+                                    <div onclick="selectMatchLeft('left-3')" id="left-3" class="match-left p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer text-xs font-medium text-slate-700 transition">
+                                        3. "Masalah kenakalan remaja kian hari kian memprihatinkan."
+                                    </div>
+                                </div>
+
+                                <!-- Right Column: Targets -->
+                                <div class="space-y-2">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jenis Unsur Struktur</p>
+                                    <div onclick="selectMatchRight('right-A')" id="right-A" class="match-right p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer text-xs font-semibold text-slate-700 transition">
+                                        A. Isu Utama (Masalah)
+                                    </div>
+                                    <div onclick="selectMatchRight('right-B')" id="right-B" class="match-right p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer text-xs font-semibold text-slate-700 transition">
+                                        B. Argumen Menentang (Kontra)
+                                    </div>
+                                    <div onclick="selectMatchRight('right-C')" id="right-C" class="match-right p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer text-xs font-semibold text-slate-700 transition">
+                                        C. Saran / Rekomendasi
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button onclick="resetMatching()" class="text-[11px] text-slate-400 hover:text-muh-green font-medium underline"><i class="fa-solid fa-rotate-left mr-1"></i>Reset Jodohkan</button>
+                            </div>
+                        </div>
+
+                        <!-- SOAL 5: Benar/Salah (True/False) -->
+                        <div id="question-5" class="question-block hidden space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-muh-green">
+                                <span class="bg-teal-100 text-muh-green text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Jenis: Benar / Salah</span>
+                                <p class="text-sm text-slate-800 font-medium mt-2 leading-relaxed">
+                                    5. Bacalah pernyataan berikut secara saksama: <br>
+                                    <span class="block mt-2 text-xs text-slate-700 font-normal leading-relaxed italic bg-white p-3 rounded-lg border">
+                                        "Teks diskusi yang baik dan objektif diperbolehkan untuk hanya menyajikan sudut pandang pro (mendukung) saja guna mempertahankan kredibilitas opini dari penulis utama tanpa mempedulikan opini sebaliknya."
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="flex gap-4 justify-center py-4">
+                                <button onclick="selectTrueFalse(true)" id="btn-tf-true" class="tf-btn w-1/3 bg-white border-2 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1">
+                                    <i class="fa-regular fa-circle-check text-2xl"></i>
+                                    Benar
+                                </button>
+                                <button onclick="selectTrueFalse(false)" id="btn-tf-false" class="tf-btn w-1/3 bg-white border-2 border-slate-200 hover:border-red-500 hover:bg-red-50 text-slate-700 hover:text-red-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1">
+                                    <i class="fa-regular fa-circle-xmark text-2xl"></i>
+                                    Salah
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Kuis Navigasi Buttons -->
+                        <div class="flex justify-between items-center pt-6 border-t">
+                            <button id="btn-quiz-prev" onclick="changeQuestion(-1)" class="bg-slate-150 hover:bg-slate-250 text-slate-600 font-bold px-4 py-2.5 rounded-xl text-xs transition duration-200 disabled:opacity-40" disabled>
+                                <i class="fa-solid fa-chevron-left mr-1"></i> Sebelumnya
+                            </button>
+                            <button id="btn-quiz-next" onclick="changeQuestion(1)" class="bg-muh-green hover:bg-teal-800 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition duration-200 flex items-center gap-1.5">
+                                Selanjutnya <i class="fa-solid fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kuis Result & Certificate Section -->
+                    <div id="quiz-result-section" class="hidden space-y-6">
+                        <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 text-center max-w-2xl mx-auto">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-150 text-emerald-600 mb-4 text-3xl" id="result-icon-container">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <h3 class="font-heading font-extrabold text-2xl text-slate-800 mb-1" id="result-greeting">Luar Biasa, Siswa Hebat!</h3>
+                            <p class="text-xs text-slate-500 mb-6">Hasil evaluasi kuis mandiri Teks Diskusi Kelas IX:</p>
+
+                            <div class="grid grid-cols-2 gap-4 max-w-md mx-auto mb-6">
+                                <div class="bg-white p-4 rounded-2xl border">
+                                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Skor Akhir Kamu</span>
+                                    <span class="text-3xl font-extrabold text-muh-green" id="result-score">90</span>
+                                    <span class="text-xs text-slate-400 block mt-1">Sarat Lulus: 75</span>
+                                </div>
+                                <div class="bg-white p-4 rounded-2xl border">
+                                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Status Kelulusan</span>
+                                    <span class="text-sm font-bold text-emerald-600 uppercase block mt-2.5" id="result-status">LULUS</span>
+                                    <span class="text-xs text-slate-400 block mt-1">Materi Berhasil Dikuasai</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-600 leading-relaxed mb-6 px-4" id="result-comment">
+                                Kamu telah menunjukkan pemahaman yang matang mengenai teks diskusi serta mampu menelaah argumen dengan kritis dan beradab.
+                            </p>
+
+                            <div id="certificate-wrapper" class="hidden border-4 border-double border-teal-800 p-6 bg-white max-w-lg mx-auto rounded-xl shadow-lg relative my-6">
+                                <div class="absolute inset-2 border border-teal-600 opacity-20"></div>
+                                <div class="relative z-10 space-y-4">
+                                    <div class="text-center">
+                                        <h4 class="font-heading font-bold text-xs tracking-widest text-muh-green uppercase">PIAGAM PENGHARGAAN</h4>
+                                        <p class="text-[9px] text-slate-400 italic">SMP Muhammadiyah 2 Depok</p>
+                                    </div>
+                                    <div class="text-center py-2">
+                                        <p class="text-[10px] text-slate-500">Diberikan kepada:</p>
+                                        <h5 class="font-heading font-extrabold text-base text-slate-800 border-b border-dashed border-slate-300 inline-block px-6 py-1" id="cert-name">NAMA SISWA</h5>
+                                        <p class="text-[9px] text-slate-500 mt-2">Telah dinyatakan <strong>LULUS</strong> dalam Kuis Evaluasi Interaktif materi:</p>
+                                        <p class="text-xs font-bold text-muh-green">Teks Diskusi (Kelas IX SMP)</p>
+                                    </div>
+                                    <div class="flex justify-between items-end text-[8px] text-slate-500 pt-4">
+                                        <div class="text-left">
+                                            <p>Tanggal Kelulusan:</p>
+                                            <p class="font-bold text-slate-700" id="cert-date">20 Juli 2026</p>
+                                        </div>
+                                        <div class="text-center border-t border-slate-200 pt-1 px-4">
+                                            <p>Guru Pendamping,</p>
+                                            <p class="font-bold text-slate-700 mt-4">Pendidik Bahasa Indonesia</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row justify-center gap-3">
+                                <button onclick="resetQuiz()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-xs transition duration-200">
+                                    <i class="fa-solid fa-rotate-left mr-1"></i>Ulangi Kuis
+                                </button>
+                                <button onclick="window.print()" class="bg-muh-yellow hover:bg-amber-500 text-muh-dark font-bold px-5 py-2.5 rounded-xl text-xs transition duration-200 shadow-md flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-print"></i> Cetak Halaman Hasil
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-muh-dark text-teal-100 py-6 mt-12 border-t-4 border-muh-yellow">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="text-xs md:text-sm font-semibold tracking-wide">
+                &copy; 2026 SMP Muhammadiyah 2 Depok. All Rights Reserved.
+            </p>
+            <p class="text-[10px] text-teal-300">
+                Pendidikan Unggul, Berkarakter Islami, Berkemajuan, dan Santun Berbahasa.
+            </p>
+            <div class="flex justify-center space-x-4 pt-1">
+                <span class="text-[9px] bg-teal-900/50 px-2 py-1 rounded border border-teal-700 text-teal-200">Kurikulum Merdeka</span>
+                <span class="text-[9px] bg-teal-900/50 px-2 py-1 rounded border border-teal-700 text-teal-200">Materi Teks Diskusi Kelas IX</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global State Variables
+        let currentTab = 'beranda';
+        
+        // Tab Switcher
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('block');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('block');
+
+            // Reset navigation styles
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-muh-green', 'text-white', 'shadow-md', 'shadow-teal-100');
+                btn.classList.add('bg-white', 'text-slate-600', 'hover:bg-teal-50', 'hover:text-muh-green');
+            });
+
+            // Highlight active button
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.remove('bg-white', 'text-slate-600', 'hover:bg-teal-50', 'hover:text-muh-green');
+            activeBtn.classList.add('bg-muh-green', 'text-white', 'shadow-md', 'shadow-teal-100');
+        }
+
+        // Sub-Materi Switcher
+        function switchSubMateri(subMateriId) {
+            document.querySelectorAll('.sub-materi-content').forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('block');
+            });
+            document.getElementById(subMateriId).classList.remove('hidden');
+            document.getElementById(subMateriId).classList.add('block');
+
+            // Button Highlight
+            document.querySelectorAll('.sub-materi-btn').forEach(btn => {
+                btn.classList.remove('border-muh-green', 'text-muh-green');
+                btn.classList.add('border-transparent', 'text-slate-500', 'hover:text-muh-green');
+            });
+            const activeBtn = document.getElementById(`btn-${subMateriId}`);
+            activeBtn.classList.add('border-muh-green', 'text-muh-green');
+            activeBtn.classList.remove('border-transparent', 'text-slate-500');
+        }
+
+        // ==========================================
+        // SIMULATOR INTERACTIVE LOGIC
+        // ==========================================
+        const simulatorData = {
+            isu: {
+                title: "Bagian Isu (Pengantar Topik)",
+                desc: "Blok ini bertindak sebagai pembuka diskusi. Penulis memperkenalkan topik atau masalah hangat yang memiliki pro dan kontra secara netral sebelum membahas detail pendapat masing-masing pihak.",
+                tag: "STRUKTUR: ISU",
+                lang: ["• <span class='font-bold text-teal-600'>\"masih menimbulkan perdebatan\"</span>: Kalimat evaluatif pembangun konflik bahasan."]
+            },
+            pro: {
+                title: "Argumen Mendukung (Pro)",
+                desc: "Blok ini menyajikan alasan positif yang mengafirmasi penggunaan gawai di sekolah. Diperkuat dengan penjelasan fungsional seperti media interaktif, e-book, dan pencarian referensi.",
+                tag: "STRUKTUR: ARGUMEN PRO",
+                lang: [
+                    "• <span class='font-bold text-emerald-600'>\"pihak yang setuju berargumen\"</span>: Kata penanda perspektif afirmatif.",
+                    "• <span class='font-bold text-emerald-600'>\"sangat membantu\"</span>: Modifikasi modalitas/penilaian positif."
+                ]
+            },
+            kontra: {
+                title: "Argumen Menentang (Kontra)",
+                desc: "Blok ini menyajikan kritik, ketakutan, dan dampak buruk guna menciptakan perimbangan opini. Ditandai dengan konjungsi pertentangan kuat di awal kalimat.",
+                tag: "STRUKTUR: ARGUMEN KONTRA",
+                lang: [
+                    "• <span class='font-bold text-red-600'>\"Namun di sisi lain\"</span>: Konjungsi pertentangan untuk membelokkan fokus argumen.",
+                    "• <span class='font-bold text-red-600'>\"mengkhawatirkan\"</span>: Kata emosional untuk menggugah simpati pembaca."
+                ]
+            },
+            simpulan: {
+                title: "Simpulan & Saran (Jalan Tengah)",
+                desc: "Merupakan resolusi damai/regulasi alternatif yang merangkul kedua sisi argumen. Menggunakan kalimat instruktif persuasif agar tidak bias.",
+                tag: "STRUKTUR: SIMPULAN",
+                lang: [
+                    "• <span class='font-bold text-amber-600'>\"Oleh karena itu\"</span>: Konjungsi simpulan kohesif antar-paragraf.",
+                    "• <span class='font-bold text-amber-600'>\"sebaiknya\"</span>: Modalitas rekomendasi damai."
+                ]
+            }
+        };
+
+        function selectSimulatorBlock(blockId) {
+            // Remove active styles from all
+            document.querySelectorAll('.sim-block').forEach(block => {
+                block.classList.remove('border-teal-500', 'bg-teal-50/50');
+                block.classList.add('border-transparent', 'bg-white', 'border-dashed', 'border-slate-200');
+            });
+
+            // Add active styles to clicked one
+            const activeBlock = document.getElementById(`sim-block-${blockId}`);
+            activeBlock.classList.add('border-teal-500', 'bg-teal-50/50');
+            activeBlock.classList.remove('border-transparent', 'bg-white', 'border-dashed', 'border-slate-200');
+
+            // Render right side output
+            const data = simulatorData[blockId];
+            document.getElementById('sim-title-tag').innerText = data.tag;
+            
+            // Adjust Tag Colors dynamically
+            const tagEl = document.getElementById('sim-title-tag');
+            tagEl.className = "text-white text-[10px] font-bold px-3 py-1 rounded-lg ";
+            if(blockId === 'isu') tagEl.className += "bg-teal-600";
+            if(blockId === 'pro') tagEl.className += "bg-emerald-600";
+            if(blockId === 'kontra') tagEl.className += "bg-red-600";
+            if(blockId === 'simpulan') tagEl.className += "bg-amber-600";
+
+            document.getElementById('sim-title').innerText = data.title;
+            document.getElementById('sim-desc').innerText = data.desc;
+
+            // Render list of languages
+            const langContainer = document.getElementById('sim-lang');
+            langContainer.innerHTML = '';
+            data.lang.forEach(liStr => {
+                const li = document.createElement('li');
+                li.innerHTML = liStr;
+                langContainer.appendChild(li);
+            });
+        }
+
+        // ==========================================
+        // GAME LOGIC (MEMILAH ARGUMEN)
+        // ==========================================
+        const gameStatements = [
+            { text: "PJJ memberikan fleksibilitas waktu bagi siswa untuk belajar secara mandiri tanpa terbatas ruang kelas.", type: "pro" },
+            { text: "Kurangnya interaksi langsung berisiko merusak kedekatan emosional dan sosialisasi anak dengan teman sebaya.", type: "kontra" },
+            { text: "Pembelajaran berbasis daring menghemat biaya transportasi harian siswa ke sekolah secara signifikan.", type: "pro" },
+            { text: "Keterbatasan jaringan internet di wilayah pelosok memicu ketimpangan kualitas belajar yang tidak adil.", type: "kontra" }
+        ];
+
+        let gameIndex = 0;
+        let gameScore = 0;
+
+        function handleGameChoice(choice) {
+            const currentItem = gameStatements[gameIndex];
+            const isCorrect = currentItem.type === choice;
+
+            if (isCorrect) {
+                gameScore += 25;
+                document.getElementById('game-score').innerText = gameScore;
+                
+                // Add to visual box
+                const listId = choice === 'pro' ? 'pro-box-list' : 'kontra-box-list';
+                const box = document.getElementById(listId);
+                if (box.innerHTML.includes('Belum ada...')) box.innerHTML = '';
+                box.innerHTML += `<span class="block bg-white p-2 rounded-lg border border-slate-100 shadow-sm mt-1">✓ ${currentItem.text}</span>`;
+            } else {
+                // Shake or alert visual feedback without modal
+                const mainScreen = document.getElementById('game-card-container');
+                mainScreen.classList.add('border-red-500', 'bg-red-50');
+                setTimeout(() => {
+                    mainScreen.classList.remove('border-red-500', 'bg-red-50');
+                }, 500);
+            }
+
+            gameIndex++;
+            updateGameUI();
+        }
+
+        function updateGameUI() {
+            const remaining = gameStatements.length - gameIndex;
+            document.getElementById('game-remaining').innerText = remaining;
+
+            if (gameIndex < gameStatements.length) {
+                document.getElementById('game-statement').innerText = `"${gameStatements[gameIndex].text}"`;
+            } else {
+                // Game Finished
+                document.getElementById('game-play-screen').classList.add('hidden');
+                document.getElementById('game-finished-screen').classList.remove('hidden');
+                document.getElementById('game-finished-screen').classList.add('flex');
+            }
+        }
+
+        function resetGame() {
+            gameIndex = 0;
+            gameScore = 0;
+            document.getElementById('game-score').innerText = '0';
+            document.getElementById('pro-box-list').innerHTML = '<span class="block italic text-slate-400">Belum ada...</span>';
+            document.getElementById('kontra-box-list').innerHTML = '<span class="block italic text-slate-400">Belum ada...</span>';
+            
+            document.getElementById('game-play-screen').classList.remove('hidden');
+            document.getElementById('game-finished-screen').classList.add('hidden');
+            document.getElementById('game-finished-screen').classList.remove('flex');
+            updateGameUI();
+        }
+
+        // ==========================================
+        // KUIS EVALUASI LOGIC (5 TYPES OF QUESTIONS)
+        // ==========================================
+        let studentName = "";
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+
+        // Interactive States
+        let q3SelectedDragItem = null;
+        let q3SelectedDragBtn = null;
+        let q3Matches = { "target-1": null, "target-2": null, "target-3": null };
+
+        let q4SelectedLeft = null;
+        let q4Matches = {}; // Stores matched pairs like {'left-1': 'right-B'}
+        
+        let q5SelectedAnswer = null; // true or false
+
+        function startQuiz() {
+            const nameInput = document.getElementById('student-name').value.trim();
+            if (!nameInput) {
+                alert("Harap masukkan nama lengkap terlebih dahulu!");
+                return;
+            }
+            studentName = nameInput;
+            document.getElementById('quiz-intro-section').classList.add('hidden');
+            document.getElementById('quiz-play-section').classList.remove('hidden');
+            currentQuestion = 1;
+            showQuestion(1);
+        }
+
+        function showQuestion(qNum) {
+            document.querySelectorAll('.question-block').forEach(q => q.classList.add('hidden'));
+            document.getElementById(`question-${qNum}`).classList.remove('hidden');
+            document.getElementById('quiz-progress-badge').innerText = `Soal: ${qNum}/${totalQuestions}`;
+
+            // Handle navigation button visibility
+            const prevBtn = document.getElementById('btn-quiz-prev');
+            const nextBtn = document.getElementById('btn-quiz-next');
+
+            prevBtn.disabled = qNum === 1;
+            
+            if (qNum === totalQuestions) {
+                nextBtn.innerHTML = `Selesai & Evaluasi <i class="fa-solid fa-square-check"></i>`;
+                nextBtn.classList.remove('bg-muh-green');
+                nextBtn.classList.add('bg-amber-600', 'hover:bg-amber-700');
+            } else {
+                nextBtn.innerHTML = `Selanjutnya <i class="fa-solid fa-chevron-right ml-1"></i>`;
+                nextBtn.classList.remove('bg-amber-600', 'hover:bg-amber-700');
+                nextBtn.classList.add('bg-muh-green', 'hover:bg-teal-800');
+            }
+        }
+
+        function changeQuestion(dir) {
+            if (dir === 1) {
+                // If moving forward from the last question, evaluate quiz!
+                if (currentQuestion === totalQuestions) {
+                    evaluateQuiz();
+                    return;
+                }
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else {
+                if (currentQuestion > 1) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                }
+            }
+        }
+
+        // --- Q3: Drag and Drop Helper Functions ---
+        function selectDragItem(itemValue, btnElement) {
+            // Remove selection highlight from other drag buttons
+            document.querySelectorAll('.drag-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-teal-400'));
+            
+            q3SelectedDragItem = itemValue;
+            q3SelectedDragBtn = btnElement;
+            btnElement.classList.add('ring-4', 'ring-teal-400');
+        }
+
+        function placeDragItem(targetId) {
+            if (!q3SelectedDragItem) return;
+
+            // Update slot state
+            q3Matches[targetId] = q3SelectedDragItem;
+            
+            // Render on slot
+            const slot = document.getElementById(targetId);
+            slot.innerText = q3SelectedDragItem;
+            slot.className = "w-full mt-3 p-2 rounded-lg bg-teal-50 border border-teal-500 flex items-center justify-center text-xs font-bold text-teal-800";
+
+            // Hide/Disable original button
+            if (q3SelectedDragBtn) {
+                q3SelectedDragBtn.classList.add('opacity-30', 'pointer-events-none');
+            }
+
+            // Reset selection state
+            q3SelectedDragItem = null;
+            q3SelectedDragBtn = null;
+        }
+
+        function resetDragNDrop() {
+            q3Matches = { "target-1": null, "target-2": null, "target-3": null };
+            document.querySelectorAll('.drag-btn').forEach(btn => {
+                btn.classList.remove('opacity-30', 'pointer-events-none', 'ring-4', 'ring-teal-400');
+            });
+            document.getElementById('target-1').innerText = "[ Letakkan di sini ]";
+            document.getElementById('target-1').className = "w-full mt-3 p-2 rounded-lg bg-white border border-slate-200 min-h-[38px] flex items-center justify-center text-xs font-bold text-slate-800";
+            document.getElementById('target-2').innerText = "[ Letakkan di sini ]";
+            document.getElementById('target-2').className = "w-full mt-3 p-2 rounded-lg bg-white border border-slate-200 min-h-[38px] flex items-center justify-center text-xs font-bold text-slate-800";
+            document.getElementById('target-3').innerText = "[ Letakkan di sini ]";
+            document.getElementById('target-3').className = "w-full mt-3 p-2 rounded-lg bg-white border border-slate-200 min-h-[38px] flex items-center justify-center text-xs font-bold text-slate-800";
+            q3SelectedDragItem = null;
+            q3SelectedDragBtn = null;
+        }
+
+        // --- Q4: Menjodohkan Helper Functions ---
+        function selectMatchLeft(leftId) {
+            // Remove previous ring style
+            document.querySelectorAll('.match-left').forEach(el => el.classList.remove('ring-4', 'ring-teal-300'));
+            
+            q4SelectedLeft = leftId;
+            document.getElementById(leftId).classList.add('ring-4', 'ring-teal-300');
+        }
+
+        function selectMatchRight(rightId) {
+            if (!q4SelectedLeft) return;
+
+            // Make sure this right item is not matched already
+            const rightItem = document.getElementById(rightId);
+
+            // Pair color representation class map
+            const colorMap = {
+                'left-1': { bg: 'bg-indigo-100', border: 'border-indigo-400', text: 'text-indigo-900' },
+                'left-2': { bg: 'bg-emerald-100', border: 'border-emerald-400', text: 'text-emerald-900' },
+                'left-3': { bg: 'bg-amber-100', border: 'border-amber-400', text: 'text-amber-900' }
+            };
+
+            // Apply color to left and right
+            const colors = colorMap[q4SelectedLeft];
+            const leftEl = document.getElementById(q4SelectedLeft);
+            leftEl.className = `match-left p-3 rounded-xl border ${colors.border} ${colors.bg} cursor-pointer text-xs font-semibold ${colors.text} transition`;
+            rightItem.className = `match-right p-3 rounded-xl border ${colors.border} ${colors.bg} cursor-pointer text-xs font-semibold ${colors.text} transition`;
+
+            // Record choice
+            q4Matches[q4SelectedLeft] = rightId;
+
+            // Clean select state
+            leftEl.classList.remove('ring-4', 'ring-teal-300');
+            q4SelectedLeft = null;
+        }
+
+        function resetMatching() {
+            q4Matches = {};
+            q4SelectedLeft = null;
+            document.querySelectorAll('.match-left').forEach(el => {
+                el.className = "match-left p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer text-xs font-medium text-slate-700 transition";
+            });
+            document.querySelectorAll('.match-right').forEach(el => {
+                el.className = "match-right p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer text-xs font-semibold text-slate-700 transition";
+            });
+        }
+
+        // --- Q5: Benar/Salah Helper Functions ---
+        function selectTrueFalse(val) {
+            q5SelectedAnswer = val;
+            
+            document.getElementById('btn-tf-true').className = "tf-btn w-1/3 bg-white border-2 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1";
+            document.getElementById('btn-tf-false').className = "tf-btn w-1/3 bg-white border-2 border-slate-200 hover:border-red-500 hover:bg-red-50 text-slate-700 hover:text-red-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1";
+
+            if (val === true) {
+                document.getElementById('btn-tf-true').className = "tf-btn w-1/3 bg-emerald-100 border-2 border-emerald-500 text-emerald-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1 shadow-md shadow-emerald-50";
+            } else {
+                document.getElementById('btn-tf-false').className = "tf-btn w-1/3 bg-red-100 border-2 border-red-500 text-red-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1 shadow-md shadow-red-50";
+            }
+        }
+
+        // ==========================================
+        // KUIS EVALUATION CALCULATION
+        // ==========================================
+        function evaluateQuiz() {
+            let finalScore = 0;
+
+            // Q1: PG Tunggal. Kunci: B
+            const q1Answer = document.querySelector('input[name="q1-opt"]:checked')?.value;
+            if (q1Answer === 'B') finalScore += 20;
+
+            // Q2: PG Kompleks. Kunci: namun, sebaliknya, tetapi (A, C, D)
+            const q2Checked = Array.from(document.querySelectorAll('input[name="q2-opt"]:checked')).map(el => el.value);
+            const isQ2Correct = q2Checked.length === 3 && q2Checked.includes('namun') && q2Checked.includes('sebaliknya') && q2Checked.includes('tetapi');
+            if (isQ2Correct) finalScore += 20;
+
+            // Q3: Drag and Drop. Target-1: Isu, Target-2: Argumen Pro, Target-3: Simpulan
+            const isQ3Correct = q3Matches['target-1'] === 'Isu' && q3Matches['target-2'] === 'Argumen Pro' && q3Matches['target-3'] === 'Simpulan';
+            if (isQ3Correct) finalScore += 20;
+
+            // Q4: Menjodohkan. Kunci: left-1: right-B, left-2: right-C, left-3: right-A
+            const isQ4Correct = q4Matches['left-1'] === 'right-B' && q4Matches['left-2'] === 'right-C' && q4Matches['left-3'] === 'right-A';
+            if (isQ4Correct) finalScore += 20;
+
+            // Q5: Benar/Salah. Kunci: Salah (false) (Teks diskusi wajib tampil seimbang kedua belah pihak)
+            if (q5SelectedAnswer === false) finalScore += 20;
+
+            // Render Results
+            document.getElementById('quiz-play-section').classList.add('hidden');
+            document.getElementById('quiz-result-section').classList.remove('hidden');
+
+            document.getElementById('result-score').innerText = finalScore;
+            
+            // Date formatting
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('cert-date').innerText = today;
+            document.getElementById('cert-name').innerText = studentName;
+
+            const iconContainer = document.getElementById('result-icon-container');
+            const statusLabel = document.getElementById('result-status');
+            const greetingLabel = document.getElementById('result-greeting');
+            const commentLabel = document.getElementById('result-comment');
+            const certWrapper = document.getElementById('certificate-wrapper');
+
+            if (finalScore >= 75) {
+                statusLabel.innerText = "LULUS";
+                statusLabel.className = "text-sm font-bold text-emerald-600 uppercase block mt-2.5";
+                iconContainer.className = "inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mb-4 text-3xl";
+                iconContainer.innerHTML = '<i class="fa-solid fa-award"></i>';
+                greetingLabel.innerText = "Luar Biasa, Siswa Hebat!";
+                commentLabel.innerHTML = `Selamat, <strong>${studentName}</strong>! Kamu telah menunjukkan pemahaman yang sangat matang mengenai teks diskusi serta mampu menelaah argumentasi dengan kritis, logis, dan tetap beradab.`;
+                certWrapper.classList.remove('hidden'); // Show beautiful certificate
+            } else {
+                statusLabel.innerText = "BELUM LULUS";
+                statusLabel.className = "text-sm font-bold text-red-600 uppercase block mt-2.5";
+                iconContainer.className = "inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-600 mb-4 text-3xl";
+                iconContainer.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+                greetingLabel.innerText = "Ayo Semangat Belajar Lagi!";
+                commentLabel.innerHTML = `Hai <strong>${studentName}</strong>, jangan berkecil hati ya. Pelajari kembali bagian <strong>Materi</strong> dan coba ulas kembali lewat <strong>Simulasi Interaktif</strong>, lalu coba kuis ini sekali lagi!`;
+                certWrapper.classList.add('hidden'); // Hide certificate
+            }
+        }
+
+        function resetQuiz() {
+            // Reset input values & checkboxes
+            document.getElementById('student-name').value = "";
+            document.querySelectorAll('input[name="q1-opt"]').forEach(el => el.checked = false);
+            document.querySelectorAll('input[name="q2-opt"]').forEach(el => el.checked = false);
+            resetDragNDrop();
+            resetMatching();
+            
+            // Reset True/False button styling
+            document.getElementById('btn-tf-true').className = "tf-btn w-1/3 bg-white border-2 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1";
+            document.getElementById('btn-tf-false').className = "tf-btn w-1/3 bg-white border-2 border-slate-200 hover:border-red-500 hover:bg-red-50 text-slate-700 hover:text-red-800 font-bold py-3 px-4 rounded-2xl transition duration-200 text-sm flex flex-col items-center gap-1";
+            q5SelectedAnswer = null;
+
+            // Transition UI back to intro
+            document.getElementById('quiz-result-section').classList.add('hidden');
+            document.getElementById('quiz-play-section').classList.add('hidden');
+            document.getElementById('quiz-intro-section').classList.remove('hidden');
+        }
+
+        // Initialize state defaults on Load
+        window.onload = function() {
+            // Active Beranda by default
+            switchTab('beranda');
+        }
+    </script>
+</body>
+</html>
